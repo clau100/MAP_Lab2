@@ -1,10 +1,9 @@
-import com.sun.jdi.LocalVariable;
-
 import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
         test();
+
     }
     public static void test(){
         MessageTask mt1 = new MessageTask("subject1", "body1", "from1", "to1", LocalDateTime.now());
