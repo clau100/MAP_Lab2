@@ -10,24 +10,15 @@ public class QueueContainer extends BigContainer {
             throw(new EmptyStackException());
         }
         Task toReturn = arr[0];
-        for(int i=0; i<=lastIndex; ++i){
+        for(int i=0; i<lastIndex; ++i){
             arr[i] = arr[i+1];
         }
         --lastIndex;
+        if(size() <= 1)
+            return toReturn;
         if(lastIndex < size() / 2){
-            Task[] aux = new Task[size() / 2];
-            java.lang.System.arraycopy(arr, 0, aux, 0, size() / 2);
-            arr = aux;
+            contract();
         }
         return toReturn;
-    }
-
-    public void add(Task task){
-        if(lastIndex + 1 >= size()){
-            Task[] aux = new Task[size() * 2];
-            java.lang.System.arraycopy(arr, 0, aux, 0, size());
-            arr = aux;
-        }
-        arr[++lastIndex] = task;
     }
 }

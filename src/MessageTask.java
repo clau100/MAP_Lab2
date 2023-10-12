@@ -1,12 +1,11 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MessageTask extends Task {
     private static class Message{
         static final AtomicInteger count = new AtomicInteger(0);
-        final int id;
+        public final int id;
         String subject;
         String body;
         String from;
