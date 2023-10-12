@@ -1,6 +1,10 @@
+package Container;
+
+import Domain.Task;
+
 import java.util.EmptyStackException;
 
-public class StackContainer extends BigContainer{
+public class StackContainer extends BigContainer {
     public StackContainer(){
         super();
     }

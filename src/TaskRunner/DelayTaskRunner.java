@@ -1,4 +1,4 @@
-import java.util.EmptyStackException;
+package TaskRunner;
 
 public class DelayTaskRunner extends AbstractTaskRunner {
     public DelayTaskRunner(TaskRunner taskRunner) {
@@ -12,19 +12,6 @@ public class DelayTaskRunner extends AbstractTaskRunner {
             super.executeOneTask();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void executeAll(){
-        try{
-            while(true){
-                Thread.sleep(3000);
-                super.executeOneTask();
-            }
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        } catch (EmptyStackException ignored){
         }
     }
 }

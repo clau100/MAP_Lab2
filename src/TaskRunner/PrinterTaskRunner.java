@@ -1,6 +1,7 @@
+package TaskRunner;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.EmptyStackException;
 
 public class PrinterTaskRunner extends AbstractTaskRunner {
 
@@ -12,16 +13,5 @@ public class PrinterTaskRunner extends AbstractTaskRunner {
     public void executeOneTask(){
         super.executeOneTask();
         System.out.println(LocalDateTime.now().format(formatter));
-    }
-
-    @Override
-    public void executeAll(){
-        try{
-            while(true){
-                super.executeOneTask();
-                System.out.println(LocalDateTime.now().format(formatter));
-            }
-        }catch(EmptyStackException ignored){
-        }
     }
 }

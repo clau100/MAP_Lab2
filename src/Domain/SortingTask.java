@@ -1,3 +1,5 @@
+package Domain;
+
 public class SortingTask extends Task {
     private static abstract class AbstractSorter{
         public abstract int[] sort(int[] arr);
@@ -56,7 +58,7 @@ public class SortingTask extends Task {
         }
 
     }
-    int[] vector;
+    public int[] vector;
     BubbleSort bubbleSort;
     QuickSort quickSort;
     public SortingTask(int[] vector, boolean fastSort){

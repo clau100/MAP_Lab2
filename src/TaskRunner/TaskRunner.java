@@ -1,3 +1,7 @@
+package TaskRunner;
+
+import Domain.Task;
+
 public interface TaskRunner {
     void executeOneTask();
     void executeAll();

@@ -1,6 +1,13 @@
-public class StrategyTaskRunner implements TaskRunner{
+package TaskRunner;
+
+import Container.Container;
+import Container.TaskContainerFactory;
+import Container.Strategy;
+import Domain.Task;
+
+public class StrategyTaskRunner implements TaskRunner {
     private final Container container;
-    StrategyTaskRunner(Strategy strategy){
+    public StrategyTaskRunner(Strategy strategy){
         TaskContainerFactory taskContainerFactory = TaskContainerFactory.getInstance();
         container = taskContainerFactory.createContainer(strategy);
     }

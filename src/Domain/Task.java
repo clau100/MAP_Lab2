@@ -1,3 +1,5 @@
+package Domain;
+
 import java.util.Objects;
 
 public abstract class Task {
@@ -29,7 +31,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "Domain.Task{" +
                 "taskID='" + taskID + '\'' +
                 ", descriere='" + descriere + '\'' +
                 '}';

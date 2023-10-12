@@ -1,5 +1,7 @@
-public abstract class BigContainer implements Container{
-    Task[] arr;
+package Container;
+import Domain.Task;
+public abstract class BigContainer implements Container {
+    public Task[] arr;
     int len;
     int lastIndex;
     public BigContainer(){

@@ -1,16 +1,22 @@
-public abstract class AbstractTaskRunner implements TaskRunner{
+package TaskRunner;
+
+import Domain.Task;
+
+public abstract class AbstractTaskRunner implements TaskRunner {
     private final TaskRunner taskRunner;
     public AbstractTaskRunner(TaskRunner taskRunner){
         this.taskRunner = taskRunner;
     }
 
 
-    public void executeOneTask() {
+    public void executeOneTask(){
         taskRunner.executeOneTask();
     }
 
     public void executeAll() {
-        taskRunner.executeOneTask();
+        while(hasTask()){
+            executeOneTask();
+        }
     }
 
     public void addTask(Task t) {

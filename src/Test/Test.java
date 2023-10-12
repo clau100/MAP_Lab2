@@ -1,3 +1,20 @@
+package Test;
+
+import Container.Container;
+import Container.QueueContainer;
+import Container.StackContainer;
+import Container.TaskContainerFactory;
+import Container.Strategy;
+
+import Domain.MessageTask;
+import Domain.SortingTask;
+import Domain.Task;
+
+import TaskRunner.TaskRunner;
+import TaskRunner.StrategyTaskRunner;
+import TaskRunner.PrinterTaskRunner;
+import TaskRunner.DelayTaskRunner;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.EmptyStackException;
@@ -12,7 +29,7 @@ public class Test {
         TaskRunnerTest.runnerTest();
     }
     public static void MessageTaskTest() {
-        System.out.println("Testing MessageTask creation:");
+        System.out.println("Testing Domain.MessageTask creation:");
         MessageTask mt1 = new MessageTask("subject1", "body1", "from1", "to1", LocalDateTime.now());
         mt1.execute();
         MessageTask mt2 = new MessageTask("subject2", "body2", "from2", "to2", LocalDateTime.now().minusDays(1));
@@ -26,7 +43,7 @@ public class Test {
         System.out.print("\n\n\n");
     }
 
-    private static class SortingTaskTest extends SortingTask{
+    private static class SortingTaskTest extends SortingTask {
         public SortingTaskTest(int[] vector, boolean fastSort) {
             super(vector, fastSort);
         }
@@ -43,7 +60,7 @@ public class Test {
         }
     }
 
-    private static class QueueContainerTest extends QueueContainer{
+    private static class QueueContainerTest extends QueueContainer {
         public static void queueTest(){
             QueueContainer queueContainer = new QueueContainer();
             assert(queueContainer.isEmpty());
@@ -55,16 +72,16 @@ public class Test {
 
             queueContainer.add(test1);
             queueContainer.add(test1);
-            assert(queueContainer.len == 4);
+            assert(queueContainer.size() == 4);
 
             queueContainer.remove();
-            assert(queueContainer.len == 2);
+            assert(queueContainer.size() == 2);
 
             queueContainer.remove();
-            assert(queueContainer.len == 1);
+            assert(queueContainer.size() == 1);
 
             queueContainer.remove();
-            assert(queueContainer.len == 1);
+            assert(queueContainer.size() == 1);
 
             try{
                 queueContainer.remove();
@@ -75,7 +92,7 @@ public class Test {
             assert(queueContainer.isEmpty());
        }
     }
-    private static class StackContainerTest extends StackContainer{
+    private static class StackContainerTest extends StackContainer {
         public static void stackTest(){
             StackContainer stackContainer = new StackContainer();
             assert(stackContainer.isEmpty());
