@@ -6,8 +6,8 @@ public class DelayTaskRunner extends AbstractTaskRunner {
     }
 
     @Override
-    public void executeOneTask(){
-        try{
+    public void executeOneTask() {
+        try {
             Thread.sleep(3000);
             super.executeOneTask();
         } catch (InterruptedException e) {

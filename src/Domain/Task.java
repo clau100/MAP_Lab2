@@ -22,12 +22,14 @@ public abstract class Task {
     }
 
     String descriere;
-    public Task(String taskID, String descriere){
+
+    public Task(String taskID, String descriere) {
         this.taskID = taskID;
         this.descriere = descriere;
     }
 
-    public Task(){}
+    public Task() {
+    }
 
     @Override
     public String toString() {
@@ -49,5 +51,6 @@ public abstract class Task {
     public int hashCode() {
         return Objects.hash(taskID, descriere);
     }
+
     public abstract void execute();
 }

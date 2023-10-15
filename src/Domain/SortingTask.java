@@ -1,47 +1,49 @@
 package Domain;
 
 public class SortingTask extends Task {
-    private static abstract class AbstractSorter{
+    private static abstract class AbstractSorter {
         public abstract int[] sort(int[] arr);
     }
-    private static class BubbleSort extends AbstractSorter{
-        public int[] sort(int[] arr){
+
+    private static class BubbleSort extends AbstractSorter {
+        public int[] sort(int[] arr) {
             boolean ok;
-            do{
+            do {
                 ok = true;
-                for(int i=0; i<arr.length-1; ++i){
-                    if(arr[i] > arr[i+1]){
-                        int aux = arr[i+1];
-                        arr[i+1] = arr[i];
+                for (int i = 0; i < arr.length - 1; ++i) {
+                    if (arr[i] > arr[i + 1]) {
+                        int aux = arr[i + 1];
+                        arr[i + 1] = arr[i];
                         arr[i] = aux;
                         ok = false;
                     }
                 }
-            }while(!ok);
+            } while (!ok);
             return arr;
         }
     }
-    private static class QuickSort extends AbstractSorter{
-        public int[] sort(int[] arr){
+
+    private static class QuickSort extends AbstractSorter {
+        public int[] sort(int[] arr) {
             quickSort(arr, 0, arr.length - 1);
             return arr;
         }
 
-        public void quickSort(int[] arr, int begin, int end){
-            if(begin < end){
+        public void quickSort(int[] arr, int begin, int end) {
+            if (begin < end) {
                 int partitionIndex = partition(arr, begin, end);
 
-                quickSort(arr, begin, partitionIndex-1);
-                quickSort(arr, partitionIndex+1, end);
+                quickSort(arr, begin, partitionIndex - 1);
+                quickSort(arr, partitionIndex + 1, end);
             }
         }
 
-        private int partition(int[] arr, int begin, int end){
+        private int partition(int[] arr, int begin, int end) {
             int pivot = arr[end];
-            int i = begin-1;
+            int i = begin - 1;
 
-            for(int j = begin; j < end; ++j){
-                if(arr[j] <= pivot){
+            for (int j = begin; j < end; ++j) {
+                if (arr[j] <= pivot) {
                     ++i;
 
                     int aux = arr[i];
@@ -50,28 +52,31 @@ public class SortingTask extends Task {
                 }
             }
 
-            int aux = arr[i+1];
-            arr[i+1] = arr[end];
+            int aux = arr[i + 1];
+            arr[i + 1] = arr[end];
             arr[end] = aux;
 
-            return i+1;
+            return i + 1;
         }
 
     }
+
     public int[] vector;
     BubbleSort bubbleSort;
     QuickSort quickSort;
-    public SortingTask(int[] vector, boolean fastSort){
+
+    public SortingTask(int[] vector, boolean fastSort) {
         this.bubbleSort = new BubbleSort();
         this.quickSort = new QuickSort();
         if (!fastSort) {
             this.vector = this.bubbleSort.sort(vector.clone());
-        }else{
+        } else {
             this.vector = this.quickSort.sort(vector.clone());
         }
     }
-    public void execute(){
-        for(int i: this.vector){
+
+    public void execute() {
+        for (int i : this.vector) {
             System.out.print(i + " ");
         }
     }

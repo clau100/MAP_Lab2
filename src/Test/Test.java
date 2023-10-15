@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.EmptyStackException;
 
 public class Test {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         MessageTaskTest();
         SortingTaskTest.sortTest();
         QueueContainerTest.queueTest();
@@ -28,6 +28,7 @@ public class Test {
         testFactory();
         TaskRunnerTest.runnerTest();
     }
+
     public static void MessageTaskTest() {
         System.out.println("Testing Domain.MessageTask creation:");
         MessageTask mt1 = new MessageTask("subject1", "body1", "from1", "to1", LocalDateTime.now());
@@ -48,120 +49,123 @@ public class Test {
             super(vector, fastSort);
         }
 
-        public static void sortTest(){
+        public static void sortTest() {
             int[] scrambled = {10, 7, 5, 3, 2, 6, 1, 4, 9, 8};
             int[] correct = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
             SortingTask test1 = new SortingTask(scrambled, true);
             SortingTask test2 = new SortingTask(scrambled, false);
 
-            assert(Arrays.equals(test1.vector, correct));
-            assert(Arrays.equals(test1.vector, test2.vector));
+            assert (Arrays.equals(test1.vector, correct));
+            assert (Arrays.equals(test1.vector, test2.vector));
         }
     }
 
     private static class QueueContainerTest extends QueueContainer {
-        public static void queueTest(){
+        public static void queueTest() {
             QueueContainer queueContainer = new QueueContainer();
-            assert(queueContainer.isEmpty());
+            assert (queueContainer.isEmpty());
 
             MessageTask test1 = new MessageTask("1", "1", "1", "1", LocalDateTime.now());
             queueContainer.add(test1);
-            assert(!queueContainer.isEmpty());
-            assert(queueContainer.arr[0].equals(test1));
+            assert (!queueContainer.isEmpty());
+            assert (queueContainer.arr[0].equals(test1));
 
             queueContainer.add(test1);
             queueContainer.add(test1);
-            assert(queueContainer.size() == 4);
+            assert (queueContainer.size() == 4);
 
             queueContainer.remove();
-            assert(queueContainer.size() == 2);
+            assert (queueContainer.size() == 2);
 
             queueContainer.remove();
-            assert(queueContainer.size() == 1);
+            assert (queueContainer.size() == 1);
 
             queueContainer.remove();
-            assert(queueContainer.size() == 1);
+            assert (queueContainer.size() == 1);
 
-            try{
+            try {
                 queueContainer.remove();
-                assert(false);
-            }catch(EmptyStackException ex){
-                assert(true);
+                assert (false);
+            } catch (EmptyStackException ex) {
+                assert (true);
             }
-            assert(queueContainer.isEmpty());
-       }
+            assert (queueContainer.isEmpty());
+        }
     }
+
     private static class StackContainerTest extends StackContainer {
-        public static void stackTest(){
+        public static void stackTest() {
             StackContainer stackContainer = new StackContainer();
-            assert(stackContainer.isEmpty());
+            assert (stackContainer.isEmpty());
 
             MessageTask test1 = new MessageTask("1", "1", "1", "1", LocalDateTime.now());
             stackContainer.add(test1);
-            assert(!stackContainer.isEmpty());
+            assert (!stackContainer.isEmpty());
 
             MessageTask test2 = new MessageTask("2", "2", "2", "2", LocalDateTime.now());
             stackContainer.add(test2);
-            assert(stackContainer.size() == 2);
+            assert (stackContainer.size() == 2);
 
             MessageTask test3 = new MessageTask("3", "3", "3", "3", LocalDateTime.now());
             stackContainer.add(test3);
-            assert(stackContainer.size() == 4);
+            assert (stackContainer.size() == 4);
 
             Task rm = stackContainer.remove();
-            assert(rm.equals(test3));
-            assert(stackContainer.size() == 2);
+            assert (rm.equals(test3));
+            assert (stackContainer.size() == 2);
 
             rm = stackContainer.remove();
-            assert(rm.equals(test2));
-            assert(stackContainer.size() == 1);
+            assert (rm.equals(test2));
+            assert (stackContainer.size() == 1);
 
             rm = stackContainer.remove();
-            assert(rm.equals(test1));
-            assert(stackContainer.size() == 1);
+            assert (rm.equals(test1));
+            assert (stackContainer.size() == 1);
 
-            try{
+            try {
                 stackContainer.remove();
-                assert(false);
-            }catch (EmptyStackException ex){
-                assert(true);
+                assert (false);
+            } catch (EmptyStackException ex) {
+                assert (true);
             }
 
-            assert(stackContainer.isEmpty());
+            assert (stackContainer.isEmpty());
         }
     }
-    private static void testFactory(){
+
+    private static void testFactory() {
         TaskContainerFactory taskContainerFactory = TaskContainerFactory.getInstance();
         Container queue = taskContainerFactory.createContainer(Strategy.FIFO);
-        assert(queue.getClass() == QueueContainer.class);
+        assert (queue.getClass() == QueueContainer.class);
 
         Container stack = taskContainerFactory.createContainer(Strategy.LIFO);
-        assert(stack.getClass() == StackContainer.class);
+        assert (stack.getClass() == StackContainer.class);
     }
-    private static class TaskRunnerTest{
-        public static void runnerTest(){
+
+    private static class TaskRunnerTest {
+        public static void runnerTest() {
             testStack();
             testQueue();
             testPrinter();
             testDelay();
         }
 
-        private static void testStack(){
+        private static void testStack() {
             System.out.println("Stack:");
             StrategyTaskRunner strategyTaskRunner = new StrategyTaskRunner(Strategy.valueOf("LIFO"));
 
             testRun(strategyTaskRunner);
         }
 
-        private static void testQueue(){
+        private static void testQueue() {
             System.out.println("Queue:");
             StrategyTaskRunner strategyTaskRunner = new StrategyTaskRunner(Strategy.valueOf("FIFO"));
 
             testRun(strategyTaskRunner);
         }
 
-        private static void testRun(TaskRunner strategyTaskRunner){
+        private static void testRun(TaskRunner strategyTaskRunner) {
             MessageTask test1 = new MessageTask("1", "1", "1", "1", LocalDateTime.now());
             MessageTask test2 = new MessageTask("2", "2", "2", "2", LocalDateTime.now());
             MessageTask test3 = new MessageTask("3", "3", "3", "3", LocalDateTime.now());
@@ -177,13 +181,13 @@ public class Test {
             System.out.print("\n\n\n");
         }
 
-        private static void testPrinter(){
+        private static void testPrinter() {
             System.out.println("Printer:");
             TaskRunner printer = new PrinterTaskRunner(new StrategyTaskRunner(Strategy.valueOf("FIFO")));
             testRun(printer);
         }
 
-        private static void testDelay(){
+        private static void testDelay() {
             System.out.println("Delay:");
             TaskRunner delay = new DelayTaskRunner(new StrategyTaskRunner(Strategy.valueOf("LIFO")));
             testRun(delay);
